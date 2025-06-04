@@ -11,7 +11,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 export default function AdocaoScreen() {
@@ -21,11 +21,15 @@ export default function AdocaoScreen() {
   const [animalSelecionado, setAnimalSelecionado] = useState(null);
 
   const animais = [
-    { nome: 'Nina', idade: '2 anos', raca: 'Vira-lata', local: 'Abrigo Esperança', foto: 'https://placedog.net/400/300?id=1' },
-    { nome: 'Tobias', idade: '1 ano', raca: 'Poodle', local: 'Lar dos Peludos', foto: 'https://placedog.net/400/300?id=2' },
-    { nome: 'Lola', idade: '3 anos', raca: 'Beagle', local: 'Cãotinho Feliz', foto: 'https://placedog.net/400/300?id=3' },
-    { nome: 'Max', idade: '4 anos', raca: 'Labrador', local: 'Amor Animal', foto: 'https://placedog.net/400/300?id=4' },
-    { nome: 'Bela', idade: '6 meses', raca: 'SRD', local: 'Patinhas do Bem', foto: 'https://placedog.net/400/300?id=5' },
+    { nome: 'Nina', idade: '2 anos', raca: 'Vira-lata', local: 'Abrigo Esperança', tipo: 'cachorro', foto: 'https://placedog.net/400/300?id=1' },
+    { nome: 'Thor', idade: '1 ano', raca: 'Poodle', local: 'Lar dos Peludos', tipo: 'cachorro', foto: 'https://placedog.net/400/300?id=2' },
+    { nome: 'Lola', idade: '3 anos', raca: 'Beagle', local: 'Cãotinho Feliz', tipo: 'cachorro', foto: 'https://placedog.net/400/300?id=3' },
+    { nome: 'Max', idade: '4 anos', raca: 'Labrador', local: 'Amor Animal', tipo: 'cachorro', foto: 'https://placedog.net/400/300?id=4' },
+    { nome: 'Bela', idade: '6 meses', raca: 'SRD', local: 'Patinhas do Bem', tipo: 'cachorro', foto: 'https://placedog.net/400/300?id=5' },
+
+    { nome: 'Malu', idade: '1 ano', raca: 'Siamês', local: 'Gato Feliz', tipo: 'gato', foto: 'https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg' },
+    { nome: 'Luna', idade: '3 anos', raca: 'Persa', local: 'Abrigo dos Felinos', tipo: 'gato', foto: 'https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg' },
+    { nome: 'mel', idade: '4 anos', raca: 'SRD', local: 'Lar dos Gatinhos', tipo: 'gato', foto: 'https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg' },
   ];
 
   const abrirDetalhes = (animal) => {
@@ -43,9 +47,18 @@ export default function AdocaoScreen() {
     fecharDetalhes();
   };
 
+  const renderIconeAnimal = (tipo) => {
+    if (tipo === 'cachorro') {
+      return <MaterialCommunityIcons name="dog" size={24} color="#0E6BA8" style={{ marginRight: 6 }} />;
+    } else if (tipo === 'gato') {
+      return <MaterialCommunityIcons name="cat" size={24} color="#D15FEE" style={{ marginRight: 6 }} />;
+    }
+    return null;
+  };
+
   return (
     <ImageBackground
-      source={require('../../../assets/image.png')} 
+      source={require('../../../assets/image.png')}
       style={styles.container}
       resizeMode="cover"
     >
@@ -65,10 +78,18 @@ export default function AdocaoScreen() {
 
         <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
           {animais.map((animal, index) => (
-            <TouchableOpacity key={index} style={styles.card} onPress={() => abrirDetalhes(animal)} activeOpacity={0.8}>
-              <Image source={{ uri: animal.foto }} style={styles.animalImage} />
+            <TouchableOpacity
+              key={index}
+              style={styles.card}
+              onPress={() => abrirDetalhes(animal)}
+              activeOpacity={0.8}
+            >
+              <Image source={{ uri: animal.foto }} style={styles.animalImage} resizeMode="cover" />
               <View style={styles.cardContent}>
-                <Text style={styles.animalName}>{animal.nome}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  {renderIconeAnimal(animal.tipo)}
+                  <Text style={styles.animalName}>{animal.nome}</Text>
+                </View>
                 <Text style={styles.animalInfo}>Raça: {animal.raca}</Text>
                 <Text style={styles.animalInfo}>Idade: {animal.idade}</Text>
                 <Text style={styles.animalInfo}>Local: {animal.local}</Text>
@@ -89,11 +110,16 @@ export default function AdocaoScreen() {
           <View style={styles.modalOverlay}>
             <View style={styles.modalBox}>
               <Text style={styles.modalTitle}>{animalSelecionado?.nome}</Text>
-              <Image source={{ uri: animalSelecionado?.foto }} style={styles.modalImage} />
+              <Image source={{ uri: animalSelecionado?.foto }} style={styles.modalImage} resizeMode="cover" />
               <View style={styles.modalLine} />
               <Text style={styles.modalInfo}>Local: {animalSelecionado?.local}</Text>
               <Text style={styles.modalInfo}>Idade: {animalSelecionado?.idade}</Text>
               <Text style={styles.modalInfo}>Raça: {animalSelecionado?.raca}</Text>
+              <Text style={[styles.modalInfo, { fontStyle: 'italic', marginBottom: 8 }]}>
+                {animalSelecionado?.tipo === 'gato'
+                  ? 'Um gato carinhoso e independente.'
+                  : 'Um cão leal e amigo para todas as horas.'}
+              </Text>
               <Text style={styles.modalInfo}>
                 Entre em contato com o abrigo para iniciar a adoção.
               </Text>
@@ -121,7 +147,7 @@ const styles = StyleSheet.create({
   safe: { flex: 1 },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.4)', 
+    backgroundColor: 'rgba(0,0,0,0.4)',
   },
   header: {
     flexDirection: 'row',
@@ -138,7 +164,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
-    marginRight: 10, 
+    marginRight: 10,
   },
   backText: {
     color: '#fff',
@@ -148,11 +174,11 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 24,       
+    fontSize: 24,
     fontWeight: '700',
     textAlign: 'center',
     color: '#fff',
-    marginLeft: -20,    
+    marginLeft: -20,
   },
   subtitle: {
     fontSize: 16,
@@ -169,8 +195,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#ffffffee',
     borderRadius: 16,
-    padding: 10,      
-    marginBottom: 12,  
+    padding: 10,
+    marginBottom: 16, 
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowOffset: { width: 0, height: 4 },
@@ -178,9 +204,9 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   animalImage: {
-    width: 90,       
-    height: 72,
-    borderRadius: 12,
+    width: 110,
+    height: 100,
+    borderRadius: 16,
     marginRight: 12,
   },
   cardContent: {
@@ -188,75 +214,71 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   animalName: {
-    fontSize: 18,       
+    fontSize: 20,
     fontWeight: '700',
     color: '#0E2F44',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   animalInfo: {
-    fontSize: 13,       
+    fontSize: 14,
     color: '#4B6584',
-    marginBottom: 2,
+    marginBottom: 4,
   },
   buttonWrapper: {
-    marginTop: 6,
+    marginTop: 8,
     backgroundColor: '#0E6BA8',
-    paddingVertical: 5,
-    borderRadius: 10,
+    paddingVertical: 6,
+    borderRadius: 12,
     alignItems: 'center',
     alignSelf: 'flex-start',
-    paddingHorizontal: 14,
   },
   viewDetails: {
     color: '#fff',
     fontWeight: '600',
-    fontSize: 13,
+    fontSize: 14,
+    paddingHorizontal: 16,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
   },
   modalBox: {
-    backgroundColor: '#F9FAFB',
-    padding: 24,
+    backgroundColor: '#fff',
     borderRadius: 20,
-    width: '100%',
-    maxWidth: 400,
-    elevation: 15,
+    padding: 24,
     alignItems: 'center',
   },
   modalTitle: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: '700',
     color: '#0E2F44',
     marginBottom: 12,
   },
   modalImage: {
-    width: 280,
+    width: 260,
     height: 180,
-    borderRadius: 16,
+    borderRadius: 18,
     marginBottom: 16,
   },
   modalLine: {
     height: 1,
-    backgroundColor: '#CCD1D9',
-    alignSelf: 'stretch',
-    marginBottom: 16,
+    backgroundColor: '#0E6BA8',
+    width: '70%',
+    marginVertical: 8,
   },
   modalInfo: {
-    fontSize: 15,
-    color: '#333',
+    fontSize: 14,
+    color: '#4B6584',
+    marginBottom: 6,
     textAlign: 'center',
-    marginBottom: 8,
   },
   primaryButton: {
-    backgroundColor: '#1B9C85',
+    backgroundColor: '#0E6BA8',
     paddingVertical: 14,
-    borderRadius: 14,
-    marginTop: 20,
+    borderRadius: 24,
+    marginTop: 18,
     width: '100%',
   },
   primaryButtonText: {
@@ -266,16 +288,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   secondaryButton: {
-    backgroundColor: '#dcdde1',
     paddingVertical: 14,
-    borderRadius: 14,
+    borderRadius: 24,
     marginTop: 12,
+    borderColor: '#0E6BA8',
+    borderWidth: 2,
     width: '100%',
   },
   secondaryButtonText: {
-    color: '#2f3640',
-    fontWeight: '600',
-    fontSize: 15,
+    color: '#0E6BA8',
+    fontWeight: '700',
+    fontSize: 16,
     textAlign: 'center',
   },
 });

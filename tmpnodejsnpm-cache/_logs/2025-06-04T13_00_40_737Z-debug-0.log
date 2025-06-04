@@ -1,0 +1,48 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.0.0
+2 info using node@v22.11.0
+3 silly config load:file:C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\davi.lima\Downloads\React-native-GS\.npmrc
+5 silly config load:file:C:\Users\davi.lima\.npmrc
+6 silly config load:file:C:\Users\davi.lima\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm star
+8 verbose argv "star"
+9 verbose logfile logs-max:10 dir:C:\Users\davi.lima\Downloads\React-native-GS\tmpnodejsnpm-cache\_logs\2025-06-04T13_00_40_737Z-
+10 verbose logfile C:\Users\davi.lima\Downloads\React-native-GS\tmpnodejsnpm-cache\_logs\2025-06-04T13_00_40_737Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 verbose stack Error: 
+13 verbose stack Mark your favorite packages
+13 verbose stack
+13 verbose stack Usage:
+13 verbose stack npm star [<package-spec>...]
+13 verbose stack
+13 verbose stack Options:
+13 verbose stack [--registry <registry>] [--no-unicode] [--otp <otp>]
+13 verbose stack
+13 verbose stack Run "npm help star" for more info
+13 verbose stack     at Star.usageError (C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\lib\base-cmd.js:111:26)
+13 verbose stack     at Star.exec (C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\lib\commands\star.js:21:18)
+13 verbose stack     at C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\lib\npm.js:255:63
+13 verbose stack     at Object.start (C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\node_modules\proc-log\lib\index.js:101:21)
+13 verbose stack     at #exec (C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\lib\npm.js:254:17)
+13 verbose stack     at async Npm.exec (C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\lib\npm.js:207:9)
+13 verbose stack     at async module.exports (C:\Users\davi.lima\AppData\Roaming\npm\node_modules\npm\lib\cli\entry.js:69:5)
+14 error code EUSAGE
+15 error
+15 error Mark your favorite packages
+15 error
+15 error Usage:
+15 error npm star [<package-spec>...]
+15 error
+15 error Options:
+15 error [--registry <registry>] [--no-unicode] [--otp <otp>]
+15 error
+15 error Run "npm help star" for more info
+16 verbose cwd C:\Users\davi.lima\Downloads\React-native-GS
+17 verbose os Windows_NT 10.0.22631
+18 verbose node v22.11.0
+19 verbose npm  v11.0.0
+20 verbose exit 1
+21 verbose code 1
+22 error A complete log of this run can be found in: C:\Users\davi.lima\Downloads\React-native-GS\tmpnodejsnpm-cache\_logs\2025-06-04T13_00_40_737Z-debug-0.log

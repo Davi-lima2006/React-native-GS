@@ -20,6 +20,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+
   const formatCpf = (value) => {
     const numericValue = value.replace(/\D/g, '');
     let formatted = numericValue;
@@ -42,14 +43,16 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleCpfChange = (text) => {
-    if (text.length <= 14) { 
+    if (text.length <= 14) {
       setCpf(formatCpf(text));
     }
   };
+
   const validateEmail = (email) => {
     const regexEmail = /^\S+@\S+\.\S+$/;
     return regexEmail.test(email);
   };
+
   const validateSenha = (senha) => {
     return senha.length >= 6;
   };
@@ -70,6 +73,7 @@ export default function LoginScreen({ navigation }) {
       Alert.alert('Senha inválida', 'A senha deve conter no mínimo 6 caracteres.');
       return;
     }
+
     navigation.replace('Home', { cpf, email, senha });
   };
 
@@ -85,13 +89,14 @@ export default function LoginScreen({ navigation }) {
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
       >
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <Ionicons name="arrow-back" size={22} color="#fff" style={styles.iconShadow} />
           <Text style={[styles.backText, styles.iconShadow]}>Voltar</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.faleConoscoButtonTop}
           onPress={() => setModalVisible(true)}
@@ -104,7 +109,6 @@ export default function LoginScreen({ navigation }) {
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
           <View style={styles.content}>
             <Image source={require('../../../assets/logo.png')} style={styles.logo} />
-
             <Text style={styles.title}>Login</Text>
 
             <Text style={styles.label}>CPF</Text>
@@ -113,7 +117,7 @@ export default function LoginScreen({ navigation }) {
               value={cpf}
               onChangeText={handleCpfChange}
               keyboardType="numeric"
-              maxLength={14} 
+              maxLength={14}
               style={styles.input}
               placeholderTextColor="#999"
             />
@@ -145,7 +149,6 @@ export default function LoginScreen({ navigation }) {
           </View>
         </ScrollView>
 
-        {/* Modal Fale Conosco */}
         <Modal
           animationType="fade"
           transparent={true}
@@ -301,7 +304,7 @@ const styles = StyleSheet.create({
   },
   modalBeautifulContainer: {
     width: '85%',
-    backgroundColor: '#7a64d9',
+    backgroundColor: '#f2f5f7',
     borderRadius: 25,
     padding: 25,
     alignItems: 'center',
@@ -310,18 +313,18 @@ const styles = StyleSheet.create({
   modalBeautifulTitle: {
     fontWeight: 'bold',
     fontSize: 26,
-    color: '#fff',
+    color: '#8a2be2',
     marginBottom: 12,
   },
   modalBeautifulMessage: {
     fontSize: 17,
-    color: '#eee',
+    color: '#000',
     marginBottom: 18,
     textAlign: 'center',
   },
   modalBeautifulEmail: {
     fontSize: 18,
-    color: '#fff',
+    color: '#8a2be2',
     marginBottom: 25,
     fontWeight: '700',
     letterSpacing: 0.5,

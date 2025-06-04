@@ -1,10 +1,9 @@
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import React, { useState } from 'react';
-import { ImageBackground, Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen({ navigation, route }) {
   const { cpf = '', email = '', senha = '' } = route.params || {};
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <ImageBackground
@@ -66,36 +65,7 @@ export default function HomeScreen({ navigation, route }) {
             <Text style={styles.cardText}>Alertas</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.faleConoscoButton}
-          onPress={() => setModalVisible(true)}
-          activeOpacity={0.8}
-        >
-          <Ionicons name="help-circle-outline" size={22} color="#6C63FF" />
-          <Text style={styles.faleConoscoText}>Fale Conosco</Text>
-        </TouchableOpacity>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.modalBackground}>
-            <View style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Fale Conosco</Text>
-              <Text style={styles.modalMessage}>
-                Se você está enfrentando algum problema, envie um email para:{'\n\n'}
-                <Text style={styles.email}>suporte@findmypet.com</Text>
-              </Text>
-              <Pressable
-                style={styles.closeButton}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text style={styles.closeButtonText}>Fechar</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
+
       </View>
     </ImageBackground>
   );
@@ -174,79 +144,5 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
-  },
-
-  // Botão branco com texto e ícone roxos
-  faleConoscoButton: {
-    position: 'absolute',
-    top: 60,
-    right: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 30,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 3 },
-    shadowRadius: 6,
-    elevation: 8,
-    zIndex: 20,
-  },
-  faleConoscoText: {
-    color: '#6C63FF',
-    marginLeft: 8,
-    fontWeight: '700',
-    fontSize: 15,
-    letterSpacing: 0.3,
-  },
-
-  // Modal
-  modalBackground: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContainer: {
-    width: '80%',
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 20,
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: '#3498db',
-    textAlign: 'center',
-  },
-  modalMessage: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 25,
-    lineHeight: 24,
-    color: '#333',
-  },
-  email: {
-    fontWeight: 'bold',
-    color: '#6C63FF',
-  },
-  closeButton: {
-    backgroundColor: '#6C63FF',
-    borderRadius: 10,
-    paddingVertical: 10,
-  },
-  closeButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: '600',
-    fontSize: 16,
   },
 });

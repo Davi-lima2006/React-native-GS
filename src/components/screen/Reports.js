@@ -60,9 +60,16 @@ export default function DenunciaScreen() {
     navigation.goBack();
   };
 
+  const novoReport = () => {
+    setSelecionados([]);
+    setEnviado(false);
+    setTituloCustomizado('');
+    setDescricao('');
+  };
+
   return (
     <ImageBackground
-      source={require('../../../assets/image.png')} 
+      source={require('../../../assets/image.png')}
       style={styles.fundo}
       resizeMode="cover"
     >
@@ -119,14 +126,17 @@ export default function DenunciaScreen() {
             ))
           )}
 
-          {!enviado && (
+          {!enviado ? (
             <TouchableOpacity style={styles.botaoEnviar} onPress={enviarReports}>
               <Text style={styles.textoEnviar}>Enviar Denúncia</Text>
             </TouchableOpacity>
-          )}
-
-          {enviado && (
-            <Text style={styles.confirmacao}>Report enviado com sucesso!</Text>
+          ) : (
+            <>
+              <Text style={styles.confirmacao}>Report enviado com sucesso!</Text>
+              <TouchableOpacity style={styles.botaoNovoReport} onPress={novoReport}>
+                <Text style={styles.textoNovoReport}>Fazer Novo Report</Text>
+              </TouchableOpacity>
+            </>
           )}
         </ScrollView>
       </View>
@@ -257,6 +267,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#2ecc71',
     textAlign: 'center',
+  },
+  botaoNovoReport: {
+    backgroundColor: '#2980b9',
+    padding: 15,
+    borderRadius: 12,
+    marginTop: 20,
+    alignItems: 'center',
+    elevation: 3,
+  },
+  textoNovoReport: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   botaoVoltar: {
     position: 'absolute',
