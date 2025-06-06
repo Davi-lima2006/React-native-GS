@@ -21,7 +21,10 @@ export default function WelcomeScreen({ navigation }) {
     >
       <View style={styles.overlay}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <TouchableOpacity
+            onPress={() => setModalVisible(true)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // aumenta área tocável
+          >
             <Text style={styles.aboutButton}>Sobre nós</Text>
           </TouchableOpacity>
         </View>
@@ -37,6 +40,15 @@ export default function WelcomeScreen({ navigation }) {
           activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+        {/* Botão cadastrar logo abaixo */}
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#5a4e9c', marginTop: 15 }]}
+          onPress={() => navigation.navigate('Register')}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.buttonText}>Cadastrar</Text>
         </TouchableOpacity>
 
         <Modal

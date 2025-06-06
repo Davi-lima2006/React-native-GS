@@ -12,7 +12,11 @@ export default function HomeScreen({ navigation, route }) {
       imageStyle={{ opacity: 0.68 }}
     >
       <View style={styles.overlay}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        {/* Botão Voltar que leva direto para Welcome */}
+        <TouchableOpacity 
+          style={styles.backButton} 
+          onPress={() => navigation.navigate('Welcome')}
+        >
           <Ionicons name="arrow-back" size={24} color="#3498db" />
           <Text style={[styles.backText, { color: '#3498db' }]}>Voltar</Text>
         </TouchableOpacity>
@@ -65,7 +69,6 @@ export default function HomeScreen({ navigation, route }) {
             <Text style={styles.cardText}>Alertas</Text>
           </TouchableOpacity>
         </View>
-
       </View>
     </ImageBackground>
   );
